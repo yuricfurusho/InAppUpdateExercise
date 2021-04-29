@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/check_for_updates_destination">
+
+    <fragment
+        android:id="@+id/check_for_updates_destination"
+        android:name="yuricfurusho.inappupdateexercise.CheckForUpdatesFragment"
+        android:label="@string/check_for_updates"
+        tools:layout="@layout/check_for_updates_fragment" />
+</navigation>

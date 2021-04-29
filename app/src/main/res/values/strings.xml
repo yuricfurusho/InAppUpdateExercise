@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">InAppUpdateExercise</string>
+    <string name="check_for_updates">Check For Updates</string>
+    <string name="current_app_version">Current App Version: %s (%s)</string>
 </resources>
