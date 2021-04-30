@@ -19,8 +19,8 @@ class CheckForUpdatesViewModel @Inject constructor(
     val appVersionName = BuildConfig.VERSION_NAME
     val appVersionCode = "${BuildConfig.VERSION_CODE}"
 
-    private val _randomNumber: MutableStateFlow<Int> = MutableStateFlow(23)
-    val randomNumber = _randomNumber.asLiveData(viewModelScope.coroutineContext)
+//    private val _randomNumber: MutableStateFlow<Int> = MutableStateFlow(23)
+//    val randomNumber = _randomNumber.asLiveData(viewModelScope.coroutineContext)
 
     private val _updateIsAvailable: MutableStateFlow<String> = MutableStateFlow("unknown")
     val updateIsAvailable = _updateIsAvailable.asLiveData(viewModelScope.coroutineContext)
@@ -45,9 +45,9 @@ class CheckForUpdatesViewModel @Inject constructor(
     )
     val notifyUserToInstallEvent = _notifyUserToInstallEvent.asLiveData(viewModelScope.coroutineContext)
 
-    fun generateRandomNumber() {
-        _randomNumber.value = (55..100).random()
-    }
+//    fun generateRandomNumber() {
+//        _randomNumber.value = (55..100).random()
+//    }
 
     fun checkForUpdates() {
         checkUpdateAvailability()
@@ -69,12 +69,11 @@ class CheckForUpdatesViewModel @Inject constructor(
 
     private fun getDaysSinceLastUpdate() {
         viewModelScope.launch {
-            _daysSinceLastUpdate.value = "${appUpdateUseCase.getStalenessDays()}"
+            _daysSinceLastUpdate.value = appUpdateUseCase.getStalenessDays()
         }
     }
 
     fun startImmediateAppUpdate() {
-        val hasImmediateUpdateStarted = true
         viewModelScope.launch {
             _startAppUpdateEvent.emit(appUpdateUseCase.startImmediateUpdate())
         }

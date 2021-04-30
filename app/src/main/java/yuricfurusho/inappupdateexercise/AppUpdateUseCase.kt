@@ -63,10 +63,10 @@ class AppUpdateUseCase @Inject constructor(
         }
     }
 
-    suspend fun getStalenessDays(): Int = suspendCoroutine { continuation ->
+    suspend fun getStalenessDays(): String = suspendCoroutine { continuation ->
         appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
             continuation.resumeWith(Result.success(
-                    appUpdateInfo.clientVersionStalenessDays()
+                    appUpdateInfo.clientVersionStalenessDays()?.toString().orEmpty()
             ))
         }
     }
