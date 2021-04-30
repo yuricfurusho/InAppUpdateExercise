@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -10,34 +9,81 @@
             type="yuricfurusho.inappupdateexercise.CheckForUpdatesViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:orientation="vertical"
         tools:context=".CheckForUpdatesFragment">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_give_me_a_random_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.generateRandomNumber()}"
+            android:text="@string/generate_new_random_number" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_give_me_a_random_number"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="@{@string/a_random_number(vm.randomNumber)}"
+            tools:text="A Random Number: %s" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_current_version"
             style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{@string/current_app_version(vm.appVersion, vm.buildNumber)}"
-            app:layout_constraintBottom_toTopOf="@id/btn_check_for_updates"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Current Version: xxx (yyyy)" />
+            android:text="@{@string/current_app_version(vm.appVersionName, vm.appVersionCode)}"
+            tools:text="Current App Version: %s (%s)" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_check_for_updates"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{() -> vm.checkForUpdates()}"
-            android:text="@string/check_for_updates"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/check_for_updates" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_update_is_available"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/update_is_available(vm.updateIsAvailable)}"
+            tools:text="Update is available: %s" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_next_version"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/next_app_version_code(vm.lastVersionCodeAvailable)}"
+            tools:text="Next App Version: %s (%s)" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start_flexible_app_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.startFlexibleAppUpdate()}"
+            android:text="@string/start_flexible_app_update" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_days_since_last_update"
+            style="@style/TextAppearance.AppCompat.Headline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{@string/days_since_last_update(vm.daysSinceLastUpdate)}"
+            tools:text="Days Since Last Update: %s" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_start_immediate_app_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> vm.startImmediateAppUpdate()}"
+            android:text="@string/start_immediate_app_update" />
+
+
+    </LinearLayout>
 </layout>
